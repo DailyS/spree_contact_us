@@ -1,4 +1,6 @@
-<h1><%= Spree.t("listing_inquiries") %></h1>
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_inquiries) %>
+<% end %>
 <% if @collection.empty? %>
   <h4><%= Spree.t(:admin_no_entries_found) %></h4>
 <% else %>

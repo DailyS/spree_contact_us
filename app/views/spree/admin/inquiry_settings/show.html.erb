@@ -1,5 +1,16 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
-<h1><%= Spree.t(:inquiry_settings) %></h1>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:inquiry_settings) %>
+<% end %>
+
+
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:edit), edit_admin_inquiry_settings_path %>
+  </li>
+<% end %>
+
 <table>
   <tr>
     <th scope="row"><%= Spree.t(:use_honeypot) %>:</th>
@@ -26,6 +37,3 @@
     <td><%= inquiry_types_translated.join(', ') %></td>
   </tr>
 </table>
-<p>
-  <%= link_to_with_icon('edit', Spree.t("edit"), edit_admin_inquiry_settings_path) %>
-</p>

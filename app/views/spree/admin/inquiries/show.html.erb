@@ -1,37 +1,46 @@
-<h3>Inquiry submitted at <%= I18n.l @inquiry.created_at %></h3>
-<p>
-  <strong><%= Spree.t(:name) %>:</strong> <%= @inquiry.name %>
-</p>
-<p>
-  <strong><%= Spree.t(:email) %>:</strong> <%= mail_to "#{@inquiry.name} <#{@inquiry.email}>", @inquiry.email %>
-</p>
-<% unless @inquiry.phone_number.blank? %>
-<p>
-  <strong><%= Spree.t(:phone) %>:</strong> <%= @inquiry.phone_number %>
-</p>
+<% content_for :page_title do %>
+  Inquiry submitted at <%= I18n.l @inquiry.created_at %>
 <% end %>
-<p>
-  <strong><%= Spree.t(:type) %>:</strong> <%= @inquiry.inquiry_type %>
-</p>
-<% unless @inquiry.order_no.blank? %>
-<p>
-  <strong><%= Spree.t(:order) %>:</strong> <%= @inquiry.order_no %>
-</p>
-<% end %>
-<p>
-  <strong><%= Spree.t(:message) %>:</strong> <%= h @inquiry.message %>
-</p>
 
-<p>
-  <strong><%= Spree.t(:ip_address) %>:</strong> <%= h @inquiry.http_remote_addr %>
-</p>
-<p>
-  <strong><%= Spree.t(:user_agent) %>:</strong> <%= h @inquiry.http_user_agent %>
-</p>
-<p>
-  <strong><%= Spree.t(:viewport_size) %>:</strong> <%= h @inquiry.client_viewport_size %>
-</p>
-<p>
-  <%= link_to Spree.t(:back), collection_url %> |
-  <%= link_to Spree.t(:delete), object_url, :confirm => Spree.t(:are_you_sure_delete), :method => :delete %>
-</p>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:back), collection_url %>
+  </li>
+<% end %>
+
+<table>
+  <tr>
+    <td><strong><%= Spree.t(:name) %>:</strong></td> <td><%= @inquiry.name %></td>
+  </tr>
+  <tr>
+    <td><strong><%= Spree.t(:email) %>:</strong></td> <td><%= @inquiry.email %></td>
+  </tr>
+  <% unless @inquiry.phone_number.blank? %>
+  <tr>
+    <td><strong><%= Spree.t(:phone) %>:</strong></td> <td><%= @inquiry.phone_number %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td><strong><%= Spree.t(:type) %>:</strong></td> <td><%= @inquiry.inquiry_type %></td>
+  </tr>
+  <% unless @inquiry.order_no.blank? %>
+  <tr>
+    <td><strong><%= Spree.t(:order) %>:</strong></td> <td><%= @inquiry.order_no %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td><strong><%= Spree.t(:message) %>:</strong></td> <td><%= h @inquiry.message %></td>
+  </tr>
+
+  <tr>
+    <td><strong><%= Spree.t(:ip_address) %>:</strong></td> <td><%= h @inquiry.http_remote_addr %></td>
+  </tr>
+  <tr>
+    <td><strong><%= Spree.t(:user_agent) %>:</strong></td> <td><%= h @inquiry.http_user_agent %></td>
+  </tr>
+  <% if @inquiry.client_viewport_size.present? %>
+    <tr>
+      <td><strong><%= Spree.t(:viewport_size) %>:</strong></td> <td><%= h @inquiry.client_viewport_size %></td>
+    </tr>
+  <% end %>
+</table>
